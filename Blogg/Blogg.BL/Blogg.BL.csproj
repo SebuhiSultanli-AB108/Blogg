@@ -15,4 +15,8 @@
     <ProjectReference Include="..\Blogg.DAL\Blogg.DAL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Exceptions\UserExceptions\" />
+  </ItemGroup>
+
 </Project>

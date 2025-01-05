@@ -10,6 +10,7 @@ public static class ServiceRegistration
     {
         services.AddScoped<ICategoryRepository, CategoryRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
+        //services.AddScoped<IUserService, UserService>();
         return services;
     }
 }

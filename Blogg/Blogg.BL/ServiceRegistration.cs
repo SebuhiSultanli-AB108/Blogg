@@ -1,4 +1,6 @@
-﻿using Blogg.BL.Services.CategoryService;
+﻿using Blogg.BL.ExternalServices.JWTService;
+using Blogg.BL.Services.CategoryService;
+using Blogg.BL.Services.UserService;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,6 +12,8 @@ public static class ServiceRegistration
     public static IServiceCollection AddService(this IServiceCollection services)
     {
         services.AddScoped<ICategoryService, CategoryService>();
+        services.AddScoped<IUserService, UserService>();
+        services.AddScoped<IJWTTokenHandler, JWTTokenHandler>();
         return services;
     }
     public static IServiceCollection AddAutoMapper(this IServiceCollection services)

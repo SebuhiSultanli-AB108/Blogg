@@ -1,6 +1,6 @@
 ﻿using Blogg.BL.DTOs.CategoryDTOs;
-using Blogg.BL.Helpers;
 using Blogg.BL.Services.CategoryService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blogg.API.Controllers
@@ -9,8 +9,8 @@ namespace Blogg.API.Controllers
     [ApiController]
     public class CategoriesController(ICategoryService _service) : ControllerBase
     {
-
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Get()
         {
             return Ok(await _service.GetAllAsync());
@@ -19,15 +19,7 @@ namespace Blogg.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(CategoryCreateDTO dto)
         {
-
             return Ok(await _service.CreateAsync(dto));
-        }
-
-
-        [HttpGet("[action]")]
-        public async Task<IActionResult> HashTest(string value)
-        {
-            return Ok(HashHelper.ComputeSHA256(value));
         }
     }
 }

@@ -2,8 +2,8 @@
 
 public enum Roles
 {
-    Publisher = 1,
-    Viewer = 2,
+    Viewer = 1,
+    Publisher = 2,
     Editor = 4,
     Banner = 8,
     Moderator = 16,

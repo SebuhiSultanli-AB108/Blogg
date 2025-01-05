@@ -7,7 +7,7 @@ public interface IGenericRepository<T> where T : BaseEntity, new()
     IQueryable<T> GetWhere(Func<T, bool> expression);
     Task<bool> IsExistAsync(int id);
     Task AddAsync(T entity);
-    Task DeleteAsync(int id);
-    void Delete(T entity);
+    Task DeleteByIdAsync(int id);
+    Task DeleteAsync(T entity);
     Task<int> SaveAsync();
 }

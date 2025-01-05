@@ -8,14 +8,18 @@ namespace Blogg.DAL.Repositories;
 public class GenericRepository<T>(BloggDbContext _context) : IGenericRepository<T> where T : BaseEntity, new()
 {
     protected DbSet<T> Table = _context.Set<T>();
+
     public async Task AddAsync(T entity)
         => await Table.AddAsync(entity);
 
-    public void Delete(T entity)
-        => Table.Remove(entity);
+    public async Task DeleteAsync(T entity)
+    {
+        Table.Remove(entity);
+        await SaveAsync();
+    }
 
-    public async Task DeleteAsync(int id)
-        => Delete(await GetByIdAsync(id));
+    public async Task DeleteByIdAsync(int id)
+        => DeleteAsync(await GetByIdAsync(id));
 
     public IQueryable<T> GetAll()
         => Table.AsQueryable();

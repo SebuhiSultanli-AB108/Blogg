@@ -6,5 +6,9 @@ namespace Blogg.DAL.Repositories;
 
 public class CategoryRepository : GenericRepository<Category>, ICategoryRepository
 {
-    public CategoryRepository(BloggDbContext _context) : base(_context) { }
+    readonly BloggDbContext _context;
+    public CategoryRepository(BloggDbContext context) : base(context)
+    {
+        _context = context;
+    }
 }

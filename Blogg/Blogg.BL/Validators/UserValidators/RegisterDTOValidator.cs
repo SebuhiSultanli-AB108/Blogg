@@ -4,10 +4,10 @@ using FluentValidation;
 
 namespace Blogg.BL.Validators.UserValidators;
 
-public class CreateUserDTOValidator : AbstractValidator<UserCreateDTO>
+public class RegisterDTOValidator : AbstractValidator<RegisterDTO>
 {
     readonly IUserRepository _repository;
-    public CreateUserDTOValidator(IUserRepository repository)
+    public RegisterDTOValidator(IUserRepository repository)
     {
         _repository = repository;
         RuleFor(x => x.Email)
@@ -17,7 +17,7 @@ public class CreateUserDTOValidator : AbstractValidator<UserCreateDTO>
         RuleFor(x => x.Username)
             .NotEmpty()
             .NotNull()
-            .Must(y => _repository.GetByUsernameAsync(y).Result == null)
+            .Must(y => _repository.GetByUsernameOrEmailAsync(y).Result == null)
                 .WithMessage("Username already exist");
     }
 }

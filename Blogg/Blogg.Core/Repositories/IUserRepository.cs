@@ -4,6 +4,6 @@ namespace Blogg.Core.Repositories;
 
 public interface IUserRepository : IGenericRepository<User>
 {
-    User GetCurrentUser();
-    Task<User?> GetByUsernameAsync(string username);
+    Task<int> Register(User user);
+    Task<User?> GetByUsernameOrEmailAsync(string value);
 }

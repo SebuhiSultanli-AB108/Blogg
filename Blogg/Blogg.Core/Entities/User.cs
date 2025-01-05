@@ -9,5 +9,5 @@ public class User : AuditableEntity
     public string PasswordHash { get; set; }
     public string Email { get; set; }
     public bool IsMale { get; set; }
-    public int Role { get; set; }
+    public int Role { get; set; } = 1;
 }

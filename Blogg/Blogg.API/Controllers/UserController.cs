@@ -1,40 +1,36 @@
-﻿using AutoMapper;
-using Blogg.BL.DTOs.UserDTOs;
-using Blogg.Core.Entities;
-using Blogg.Core.Repositories;
+﻿using Blogg.BL.DTOs.UserDTOs;
+using Blogg.BL.Services.UserService;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blogg.API.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class UserController(IUserRepository _repository, IMapper _mapper) : ControllerBase
+public class UserController(IUserService _service) : ControllerBase
 {
     [HttpPost("[action]")]
-    public async Task<IActionResult> Create(UserCreateDTO dto)
+    public async Task<IActionResult> Register(RegisterDTO dto)
     {
-        await _repository.AddAsync(_mapper.Map<User>(dto));
-        await _repository.SaveAsync();
-        return Ok();
+        return Ok(await _service.RegisterAsync(dto));
+    }
+
+    [HttpPost("[action]")]
+    public async Task<IActionResult> Login(LoginDTO dto)
+    {
+        return Ok(await _service.LoginAsync(dto));
     }
 
     [HttpPost("[action]")]
     public async Task<IActionResult> Delete(int id)
     {
-        await _repository.DeleteAsync(id);
+        await _service.DeleteAsync(id);
         return Ok();
     }
 
     [HttpGet("[action]")]
     public async Task<IActionResult> GetAll()
     {
-        return Ok(_repository.GetAll());
-    }
-
-    [HttpGet("[action]")]
-    public async Task<IActionResult> GetByUsername(string username)
-    {
-        return Ok(await _repository.GetByUsernameAsync(username));
+        return Ok(_service.GetAll());
     }
 
 
